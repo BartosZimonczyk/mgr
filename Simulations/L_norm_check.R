@@ -1,4 +1,4 @@
-source("basic_functions.R")
+source("src/basic_functions.R")
 
 set.seed(42)
 
@@ -23,10 +23,18 @@ for(i in 1:MC_runs){
 write.csv(data.frame('L quantiles' = apply(Lqs, 2, mean),
                      'Norm quantiles' = qnorm(c(0.01, 0.025, 0.05, 0.1, 0.9, 0.95, 0.975, 0.99)),
             row.names = c(0.01, 0.025, 0.05, 0.1, 0.9, 0.95, 0.975, 0.99)),
-        "L_quantiles.csv")
+        "Simulations/L_quantiles.csv")
 
-write.csv(data.frame('L quantiles' = apply(Lq2s, 2, mean),
+write.csv(data.frame('L2 quantiles' = apply(Lq2s, 2, mean),
                      'Chisq quantiles' = qchisq(c(0.9, 0.95, 0.975, 0.99), df=1),
                      row.names = c(0.9, 0.95, 0.975, 0.99)),
-          "L2_quantiles.csv")
+          "Simulations/L2_quantiles.csv")
+
+pvals <- c()
+for(i in 1:MC_runs){
+    pvals[i] <- shapiro.test(Ls[i,])$p.value
+}
+png('Images/pvals_shapiro_on_L.png')
+hist(pvals)
+dev.off()
 
