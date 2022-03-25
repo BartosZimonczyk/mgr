@@ -18,6 +18,6 @@ L <- function(j, X){
     sum(final)/sqrt(n)
 }
 
-Q <- function(X, k){
+Q <- function(k, X){
     sum(sapply(1:k, L, X)^2)
 }
