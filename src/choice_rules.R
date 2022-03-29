@@ -1,5 +1,10 @@
 source("src/basic_functions.R")
 
+cj_treshold <- function(j, dn, Dn, deltan){
+  inside <- 1 - 0.5 * (deltan/Dn/choose(dn, j))^(1/j)
+  qnorm(inside)
+}
+
 I_func <- function(dn, X, c_t=2.4){
     n <- length(X)
     Ls <- sapply(1:dn, L, X)
