@@ -16,8 +16,9 @@ for(i in 1:20){
     T.As[i] <- rule_T.A(X, 5)
 }
 
-Ss
 As
-Ms
-T.Ms
 T.As
+Ss
+T.Ms
+Ms
+
