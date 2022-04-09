@@ -1,11 +1,40 @@
 source("src/Q_test.R")
+library(tidyverse)
 set.seed(42)
 
-N <- 100
-n <- 50
-c_t <- 2.35
-r <- 5
+get_this_file <- function(){
+  commandArgs() %>% 
+    tibble::enframe(name=NULL) %>%
+    tidyr::separate(col=value, into=c("key", "value"), sep="=", fill='right') %>%
+    dplyr::filter(key == "--file") %>%
+    dplyr::pull(value)
+}
+
+# automating simulations by changing control to naming
+# given folders and files
+path <- get_this_file()
+path_splitted <- strsplit(path, "/")[[1]]
+this_folder_name <- path_splitted[3]
+this_file_name <- path_splitted[5]
+
+parameters <- strsplit(this_folder_name, "_")
+parameters <- sapply(parameters, substring, 2)
+parameters <- sapply(parameters, as.double)
+parameters <- unname(parameters)
+
+n <- parameters[1]
+N <- parameters[2]
+r <- parameters[3]
+c_t <- as.double(substr(this_file_name, 14, 16)) / 100
+
 quants <- c(0.948, 0.949, 0.95, 0.951, 0.952)
+
+cat("Sanity check of hyperparameters: \n")
+cat(paste("n:\t", n, "\n"))
+cat(paste("N:\t", N, "\n"))
+cat(paste("r:\t", r, "\n"))
+cat(paste("c:\t", c_t, "\n"))
+cat("\n")
 
 # by columns we have test with rules respectively
 # A, T.A, S, T.M, M
@@ -16,9 +45,9 @@ for(i in 1:N){
   X <- rnorm(n)
   Q_matrix[i,] <- c(
     Q_test(X, r, rule = "A")$Q.test,
-    Q_test(X, r, rule = "T.A")$Q.test,
+    Q_test(X, r, rule = "T.A", c_t)$Q.test,
     Q_test(X, r, rule = "S")$Q.test,
-    Q_test(X, r, rule = "T.M")$Q.test,
+    Q_test(X, r, rule = "T.M", c_t)$Q.test,
     Q_test(X, r, rule = "M")$Q.test
   )
 }
@@ -33,7 +62,10 @@ for(i in 1:5){
 output <- data.frame(final_matrix, row.names=c("A", "T.A", "S", "T.M", "M"))
 colnames(output) <- quants
 
-write.csv(output, "Simulations/MC_qunatiles/Tables/Q_quantiles_c235.csv")
+write.csv(
+  output, 
+  paste("Simulations/MC_qunatiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
+)
 
 
 

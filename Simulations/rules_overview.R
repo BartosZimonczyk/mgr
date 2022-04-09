@@ -8,7 +8,7 @@ T.Ms <- c()
 T.As <- c()
 
 for(i in 1:20){
-    X <- rnorm(50, 0, 1)
+    X <- rnorm(50)
     Ss[i] <- rule_S(X, 5)
     As[i] <- rule_A(X, 5)
     Ms[i] <- rule_M(X, 5)
