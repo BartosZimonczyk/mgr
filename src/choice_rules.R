@@ -40,7 +40,7 @@ rule_T.M <- function(X, rn, c_t=2.4){
 rule_T.A <- function(X, rn, c_t=2.4){
     n <- length(X)
     dns <- 2^(0:rn)
-    Qks <- sapply(dns, function(y) Q(y, X) - (I_func(y, X, c_t)*log(n) + (1-I_func(y, X, c_t))*2*y))
+    Qks <- sapply(dns, function(y) Q(y, X) - (I_func(y, X, c_t)*log(n)*y + (1-I_func(y, X, c_t))*2*y))
     T.A <- which.max(Qks)
     2^(T.A-1) 
 }

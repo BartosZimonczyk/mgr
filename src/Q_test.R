@@ -6,7 +6,7 @@ Q_test <- function(X, r, rule, c_t=2.4){
   if(rule == "A"){
     k <- rule_A(X, r)
   }else if(rule == "T.A"){
-    k <- rule_T.M(X, r, c_t)
+    k <- rule_T.A(X, r, c_t)
   }else if(rule == "S"){
     k <- rule_S(X, r)
   }else if(rule == "T.M"){
