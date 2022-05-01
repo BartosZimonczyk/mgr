@@ -86,12 +86,12 @@ colnames(df_output) <- quants
 
 write.csv(
   format(df_output, nsmall=3, digits=3),
-  paste("Simulations/MC_qunatiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
+  paste("Simulations/MC_quantiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
 )
 
 rule_names <- c("A", "T.A", "S", "T.M", "M")
 
-png(paste("Simulations/MC_qunatiles/", this_folder_name, "/Plots/RulesHist_c", round(c_t*100, 0), ".png", sep=""), height=900, width=600)
+png(paste("Simulations/MC_quantiles/", this_folder_name, "/Plots/RulesHist_c", round(c_t*100, 0), ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
   hist(
