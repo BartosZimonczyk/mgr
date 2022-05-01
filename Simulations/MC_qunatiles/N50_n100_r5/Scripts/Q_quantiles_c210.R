@@ -1,5 +1,7 @@
 source("src/Q_test.R")
-library(tidyverse)
+library(tibble)
+library(tidyr)
+library(dplyr)
 set.seed(42)
 
 get_this_file <- function(){
