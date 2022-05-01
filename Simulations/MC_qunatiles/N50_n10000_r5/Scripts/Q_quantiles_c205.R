@@ -45,16 +45,32 @@ cat("\n")
 # by columns we have test with rules respectively
 # A, T.A, S, T.M, M
 Q_matrix <- matrix(nrow=N, ncol=5)
+K_matrix <- matrix(nrow=N, ncol=5)
 
 for(i in 1:N){
-  cat(paste("Computing...\t Step", i, "\n"))
+  # cat(paste("Computing...\t Step", i, "\n"))
   X <- rnorm(n, 0, 1)
+  
+  Q_result_A <- Q_test(X, r, rule = "A")
+  Q_result_T.A <- Q_test(X, r, rule = "T.A", c_t)
+  Q_result_S <- Q_test(X, r, rule = "S")
+  Q_result_T.M <- Q_test(X, r, rule = "T.M", c_t)
+  Q_result_M <- Q_test(X, r, rule = "M")
+  
   Q_matrix[i,] <- c(
-    Q_test(X, r, rule = "A")$Q.test,
-    Q_test(X, r, rule = "T.A", c_t)$Q.test,
-    Q_test(X, r, rule = "S")$Q.test,
-    Q_test(X, r, rule = "T.M", c_t)$Q.test,
-    Q_test(X, r, rule = "M")$Q.test
+    Q_result_A$Q.test,
+    Q_result_T.A$Q.test,
+    Q_result_S$Q.test,
+    Q_result_T.M$Q.test,
+    Q_result_M$Q.test
+  )
+  
+  K_matrix[i,] <- c(
+    Q_result_A$k,
+    Q_result_T.A$k,
+    Q_result_S$k,
+    Q_result_T.M$k,
+    Q_result_M$k
   )
 }
 
@@ -65,10 +81,29 @@ for(i in 1:5){
   final_matrix[i,] <- quantile(Q_matrix[,i], probs=quants, names=F)
 }
 
-output <- data.frame(final_matrix, row.names=c("A", "T.A", "S", "T.M", "M"))
-colnames(output) <- quants
+df_output <- data.frame(final_matrix, row.names=c("A", "T.A", "S", "T.M", "M"))
+colnames(df_output) <- quants
 
 write.csv(
-  format(output, nsmall=3, digits=3),
+  format(df_output, nsmall=3, digits=3),
   paste("Simulations/MC_qunatiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
 )
+
+rule_names <- c("A", "T.A", "S", "T.M", "M")
+
+png(paste("Simulations/MC_qunatiles/", this_folder_name, "/Plots/RulesHist_c", round(c_t*100, 0), ".png", sep=""), height=900, width=600)
+par(mfrow=c(5,1))
+for(i in 1:5){
+  hist(
+    K_matrix[,i], 
+    main=paste("Value of rule", rule_names[i]),
+    breaks=1:(2^r),
+    xlim=c(1,2^r),
+    freq=FALSE
+  )
+}
+
+dev.off()
+
+
+

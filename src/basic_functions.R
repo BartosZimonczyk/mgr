@@ -19,5 +19,8 @@ L <- function(j, X){
 }
 
 Q <- function(k, X){
-    sum(sapply(1:k, L, X)^2)
+    Ls <- sapply(1:k, L, X)^2
+    output <- list(sum(Ls), Ls)
+    names(output) <- c("Q.value", "Ls")
+    output
 }

@@ -17,7 +17,8 @@ Q_test <- function(X, r, rule, c_t=2.4){
     stop(sprintf("The %s rule is not an implemented rule. Check avilable ones.", rule))
   }
   
-  output <- list(Q(k,X), k)
-  names(output) <- c("Q.test", "k")
+  Q_all <- Q(k, X)
+  output <- list(Q_all$Q.value, k, Q_all$Ls)
+  names(output) <- c("Q.test", "k", "Ls")
   output
 }
