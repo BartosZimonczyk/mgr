@@ -31,8 +31,7 @@ c_t <- as.double(substr(this_file_name, 14, 16)) / 100
 # n <- 50
 # N <- 100
 # r <- 5
-# c_t <- 2
-
+# c_t <- 2.2
 
 quants <- c(0.948, 0.949, 0.95, 0.951, 0.952)
 
@@ -70,10 +69,6 @@ output <- data.frame(final_matrix, row.names=c("A", "T.A", "S", "T.M", "M"))
 colnames(output) <- quants
 
 write.csv(
-  output, 
+  format(output, nsmall=3, digits=3),
   paste("Simulations/MC_qunatiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
 )
-
-
-
-

@@ -27,6 +27,12 @@ N <- parameters[2]
 r <- parameters[3]
 c_t <- as.double(substr(this_file_name, 14, 16)) / 100
 
+# testing by hand
+# n <- 50
+# N <- 100
+# r <- 5
+# c_t <- 2.2
+
 quants <- c(0.948, 0.949, 0.95, 0.951, 0.952)
 
 cat("Sanity check of hyperparameters: \n")
@@ -42,7 +48,7 @@ Q_matrix <- matrix(nrow=N, ncol=5)
 
 for(i in 1:N){
   cat(paste("Computing...\t Step", i, "\n"))
-  X <- rnorm(n)
+  X <- rnorm(n, 0, 1)
   Q_matrix[i,] <- c(
     Q_test(X, r, rule = "A")$Q.test,
     Q_test(X, r, rule = "T.A", c_t)$Q.test,
@@ -63,10 +69,6 @@ output <- data.frame(final_matrix, row.names=c("A", "T.A", "S", "T.M", "M"))
 colnames(output) <- quants
 
 write.csv(
-  output, 
+  format(output, nsmall=3, digits=3),
   paste("Simulations/MC_qunatiles/", this_folder_name, "/Tables/Q_quantiles_c", round(c_t*100, 0), ".csv", sep="")
 )
-
-
-
-

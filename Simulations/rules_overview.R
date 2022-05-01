@@ -16,7 +16,7 @@ for(i in 1:20){
     T.As[i] <- rule_T.A(X, 5)
 }
 
-As
+mean(As == 1) * 100
 T.As
 Ss
 T.Ms
