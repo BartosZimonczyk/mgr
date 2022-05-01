@@ -9,6 +9,9 @@ cat << EOF | qsub
 # load R version
 module load R/3.6.2-foss-2019b >& output1.txt
 
+# go to the mgr directory to execute Rscript properly
+cd mgr
+
 # execute given R script
 Rscript $1 >& output2.txt
 EOF
