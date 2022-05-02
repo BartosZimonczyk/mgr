@@ -1,2 +1,6 @@
+# ignore R logs related files
 .RData
 .RHistory
+
+# ignore WCSS logs related files 
+*.e4*

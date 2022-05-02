@@ -1,5 +1,6 @@
 source("src/Q_test.R")
 library(tidyverse)
+options(bitmapType='cairo')
 set.seed(42)
 
 get_this_file <- function(){
