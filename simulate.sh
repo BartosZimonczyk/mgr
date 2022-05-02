@@ -4,7 +4,8 @@ cat << EOF | qsub
 #PBS -l walltime=2:00:00
 #PBS -l select=1:ncpus=1:mem=2048MB
 #PBS -l software=qsub_stdin
-#PBS -m be
+#PBS -N $2
+#PBS -m n
 
 # go to the mgr directory to execute Rscript properly
 cd mgr
