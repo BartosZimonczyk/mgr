@@ -8,9 +8,8 @@
 ✖ dplyr::lag()    masks stats::lag()
 Sanity check of hyperparameters: 
 n:	 50 
-N:	 100 
+N:	 10000 
 r:	 5 
-c:	 2 
-
-null device 
+c:	 2.3 nunull device 
           1 
+
