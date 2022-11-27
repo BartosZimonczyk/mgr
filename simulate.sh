@@ -1,5 +1,6 @@
 cat << EOF | qsub
 #!/bin/bash
+#PBS -q normal
 #PBS -l walltime=10:00:00
 #PBS -l select=1:ncpus=1:mem=8192MB
 #PBS -l software=qsub_stdin
