@@ -29,10 +29,10 @@ r <- parameters[3]
 c_t <- as.double(substr(this_file_name, 14, 16)) / 100
 
 # testing by hand
-# n <- 50
-# N <- 100
-# r <- 5
-# c_t <- 2.2
+n <- 50
+N <- 100
+r <- 5
+c_t <- 2.2
 
 quants <- c(0.948, 0.949, 0.95, 0.951, 0.952)
 
@@ -99,9 +99,11 @@ for(i in 1:5){
     K_matrix[,i], 
     main=paste("Value of rule", rule_names[i]),
     breaks=1:(2^r),
-    xlim=c(1,2^r),
-    freq=FALSE
+    xlim=c(1,2^r)-0.5,
+    freq=FALSE,
+    xaxt='n'
   )
+  axis(side=1, at=1:(2^r)-0.5, labels=1:(2^r))
 }
 
 dev.off()
