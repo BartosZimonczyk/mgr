@@ -10,7 +10,7 @@
 source /usr/local/sbin/modules.sh >& load_modules.txt
 
 # load R version
-module load /usr/local/easybuild/python-2.7.15-gcc7.4.0/modules/all/R/3.6.2-foss-2019b >& load_output.txt
+module load "/usr/local/easybuild/python-2.7.15-gcc7.4.0/modules/all/R/3.6.2-foss-2019b" >& load_output.txt
 
 # execute given R script
 Rscript $1 >& Rscript_output.txt
