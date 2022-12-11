@@ -1,10 +1,10 @@
 cat << EOF | qsub
 #!/bin/bash
-#PBS -l walltime=10:00:00
-#PBS -l select=1:ncpus=1:mem=8192MB
-#PBS -l software=qsub_stdin
-#PBS -N "$2"
-#PBS -m n
+#SBATCH --job-name="job_$2"
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4GB
 
 # go to the mgr directory to execute Rscript properly
 cd mgr
