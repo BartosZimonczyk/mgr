@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in {00 05 10 15 20 25 30 35 40 45 50}
+for i in 00 05 10 15 20 25 30 35 40 45 50
   do
     /usr/local/bin/sub-r-3.6.2-foss-2019b ~/mgr/Simulations/MC_quantiles/$1/Scripts/Q_quantiles_c2$i.R -w 4
   done
