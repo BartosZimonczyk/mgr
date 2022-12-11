@@ -11,7 +11,7 @@
 source /usr/local/sbin/modules.sh >& load_modules.txt
 
 # load R version
-module load r/3.5.3-intel15.0 >& load_output.txt
+module load R >& load_output.txt
 
 # execute given R script
 Rscript $1 >& Rscript_output.txt
