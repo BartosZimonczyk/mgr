@@ -1,4 +1,3 @@
-cat << EOF | sbatch
 #!/bin/bash
 #SBATCH --time=4:00:00
 #SBATCH --job-name="mgr_$2"
@@ -18,4 +17,3 @@ module load R/3.6.2-foss-2019b >& load_output.txt
 
 # execute given R script
 Rscript $1 >& Rscript_output.txt
-EOF
