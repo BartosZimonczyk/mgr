@@ -5,6 +5,7 @@
 #SBATCH --tasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=4GB
+#SBATCH --mail-user=bartosz.zimonczyk@gmail.com
 
 # load modules
 source /usr/local/sbin/modules.sh >& load_modules.txt
