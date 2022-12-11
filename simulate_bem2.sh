@@ -1,7 +1,7 @@
 cat << EOF | sbatch
 #!/bin/bash
 #SBATCH --time=4:00:00
-#SBATCH --job-name="job_$2"
+#SBATCH --job-name="mgr_$2"
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --cpus-per-task=1
