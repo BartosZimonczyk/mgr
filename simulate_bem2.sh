@@ -1,4 +1,4 @@
-cat << EOF | qsub
+cat << EOF | sbatch
 #!/bin/bash
 #SBATCH --job-name="job_$2"
 #SBATCH --nodes=1
