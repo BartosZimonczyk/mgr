@@ -16,8 +16,8 @@ get_this_file <- function(){
 path <- get_this_file()
 print(path)
 path_splitted <- strsplit(path, "/")[[1]]
-this_folder_name <- path_splitted[3]
-this_file_name <- path_splitted[5]
+this_folder_name <- path_splitted[6]
+this_file_name <- path_splitted[8]
 
 parameters <- strsplit(this_folder_name, "_")
 print(parameters)
