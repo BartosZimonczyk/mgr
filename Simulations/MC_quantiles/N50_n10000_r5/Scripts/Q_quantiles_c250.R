@@ -19,6 +19,7 @@ this_folder_name <- path_splitted[3]
 this_file_name <- path_splitted[5]
 
 parameters <- strsplit(this_folder_name, "_")
+cat(parameters)
 parameters <- sapply(parameters, substring, 2)
 parameters <- sapply(parameters, as.double)
 parameters <- unname(parameters)
