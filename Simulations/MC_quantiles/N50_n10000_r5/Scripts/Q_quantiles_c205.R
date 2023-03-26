@@ -95,18 +95,27 @@ rule_names <- c("A", "T.A", "S", "T.M", "M")
 png(paste("Simulations/MC_quantiles/", this_folder_name, "/Plots/RulesHist_c", round(c_t*100, 0), ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
-  hist(
-    K_matrix[,i], 
-    main=paste("Value of rule", rule_names[i]),
-    breaks=1:(2^r),
-    xlim=c(1,2^r)-0.5,
-    freq=FALSE,
-    xaxt='n'
+  freqs = c(mean(K_matrix[,i] == 1),
+            mean(K_matrix[,i] == 2),
+            mean(K_matrix[,i] == 4),
+            mean(K_matrix[,i] == 8),
+            mean(K_matrix[,i] == 16),
+            mean(K_matrix[,i] == 32))
+  b = barplot( 
+    freqs,
+    names.arg = c("1", "2", "4", "8", "16", "32"),
+    ylim = c(0,1.3),
+    yaxt='n',
+    main=paste("Histogram of values of rule", rule_names[i]),
+    xlab = rule_names[i],
+    ylab = "Density"
   )
-  axis(side=1, at=1:(2^r)-0.5, labels=1:(2^r))
+  text(b, freqs+0.15, labels=paste(as.character(freqs*100), "%"))
 }
 
 dev.off()
+
+
 
 
 
