@@ -14,6 +14,17 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-Error in cat(parameters) : 
-  argument 1 (type 'list') cannot be handled by 'cat'
+[[1]]
+[1] "barzim11"
+
+Warning message:
+In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
+Sanity check of hyperparameters: 
+n:	 NA 
+N:	 NA 
+r:	 NA 
+c:	 NA 
+
+Error in matrix(nrow = N, ncol = 5) : 
+  invalid 'nrow' value (too large or NA)
 Execution halted
