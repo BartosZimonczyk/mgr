@@ -14,12 +14,13 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_quantiles/N50_n10000_r5/Scripts/Q_quantiles_c130.R"
+[1] "/home/barzim11/mgr/Simulations/MC_quantiles/N50_n10000_r5/Scripts/Q_quantiles_c145.R"
 [[1]]
-[1] "barzim11"
+[1] "MC"        "quantiles"
 
-Warning message:
-In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
+Warning messages:
+1: In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
+2: In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
 Sanity check of hyperparameters: 
 n:	 NA 
 N:	 NA 
