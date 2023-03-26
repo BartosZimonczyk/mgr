@@ -14,19 +14,14 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_quantiles/N50_n10000_r5/Scripts/Q_quantiles_c145.R"
+[1] "/home/barzim11/mgr/Simulations/MC_quantiles/N50_n10000_r5/Scripts/Q_quantiles_c185.R"
 [[1]]
-[1] "MC"        "quantiles"
+[1] "N50"    "n10000" "r5"    
 
-Warning messages:
-1: In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
-2: In lapply(X = X, FUN = FUN, ...) : NAs introduced by coercion
 Sanity check of hyperparameters: 
-n:	 NA 
-N:	 NA 
-r:	 NA 
-c:	 NA 
-
-Error in matrix(nrow = N, ncol = 5) : 
-  invalid 'nrow' value (too large or NA)
-Execution halted
+n:	 50 
+N:	 10000 
+r:	 5 
+c:	 1.85 
+nnull device 
+          1 
