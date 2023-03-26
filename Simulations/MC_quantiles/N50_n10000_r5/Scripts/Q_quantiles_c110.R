@@ -14,6 +14,7 @@ get_this_file <- function(){
 # automating simulations by changing control to naming
 # given folders and files
 path <- get_this_file()
+print(path)
 path_splitted <- strsplit(path, "/")[[1]]
 this_folder_name <- path_splitted[3]
 this_file_name <- path_splitted[5]
