@@ -18,7 +18,7 @@ Q_test <- function(X, r, rule, c_t=2.4){
   }
   
   Q_all <- Q(k, X)
-  output <- list(Q_all$Q.value, k, Q_all$Ls)
+  output <- list(Q_all$Q.value, k, c(Q_all$Ls, rep(0, times=2^r - k)))
   names(output) <- c("Q.test", "k", "Ls")
   output
 }
