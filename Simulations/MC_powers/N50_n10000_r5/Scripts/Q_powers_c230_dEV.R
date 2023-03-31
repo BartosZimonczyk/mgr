@@ -24,18 +24,18 @@ parameters <- sapply(parameters, substring, 2)
 parameters <- sapply(parameters, as.double)
 parameters <- unname(parameters)
 
+# testing by hand
+# n <- 50
+# N <- 100
+# r <- 5
+# c_t <- 2.3
+# distribution <- "B3"
+
 n <- parameters[1]
 N <- parameters[2]
 r <- parameters[3]
 distribution <- parameters[4]
 c_t <- as.double(substr(this_file_name, 14, 16)) / 100
-
-# testing by hand
-n <- 50
-N <- 100
-r <- 5
-c_t <- 2.3
-distribution <- "B3"
 
 # load empirical quantiles for each rule
 critical_values <- read.csv(
@@ -47,6 +47,7 @@ cat(paste("n:\t", n, "\n"))
 cat(paste("N:\t", N, "\n"))
 cat(paste("r:\t", r, "\n"))
 cat(paste("c:\t", c_t, "\n"))
+cat(paste("d:\t", distribution, "\n"))
 cat("\n")
 
 ###########
