@@ -1,0 +1,24 @@
+/opt/pbs/lib/python/altair/pbs/v1/_base_types.py:1436: DeprecationWarning: object.__new__() takes no parameters
+  return object.__new__(cls, value, is_entity)
+/opt/pbs/lib/python/altair/pbs/v1/_svr_types.py:259: DeprecationWarning: object.__new__() takes no parameters
+  return object.__new__(cls, value)
+/opt/pbs/lib/python/altair/pbs/v1/_base_types.py:793: DeprecationWarning: object.__init__() takes no parameters
+  super(pbs_str,self).__init__(value)
+/opt/pbs/lib/python/altair/pbs/v1/_base_types.py:767: DeprecationWarning: object.__init__() takes no parameters
+  super(pbs_int,self).__init__(value)
+/opt/pbs/lib/python/altair/pbs/v1/_svr_types.py:379: DeprecationWarning: object.__new__() takes no parameters
+  return object.__new__(cls, value)
+ binutils/2.25 load complete.
+ intel/15.0 load complete.
+ 'openmpi/1.8.4-intel15.0' load complete.
+ jdk7/1.7.0_79 load complete.
+ geos/3.4.2-intel15.0 load complete.
+ szip/2.1-intel15.0 load complete.
+ hdf/4.2.11-intel15.0 load complete.
+ hdf5/1.8.14-intel15.0 load complete.
+ netcdf/4.3.3.1-intel15.0 load complete.
+ jasper/1.900.1-intel15.0 load complete.
+ proj/4.9.1-intel15.0 load complete.
+ gdal/1.11.2-intel15.0 load complete.
+ 'jags/3.4.0-intel15.0' load complete.
+ r/3.1.3-intel15.0 load complete.
