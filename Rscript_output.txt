@@ -14,14 +14,15 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_quantiles/N50_n10000_r5/Scripts/Q_quantiles_c185.R"
+[1] "/home/barzim11/mgr/Simulations/MC_powers/N50_n10000_r5/Scripts/Q_powers_c230_dNormShift2.R"
 [[1]]
 [1] "N50"    "n10000" "r5"    
 
-Sanity check of hyperparameters: 
-n:	 50 
-N:	 10000 
-r:	 5 
-c:	 1.85 
-nnull device 
-          1 
+Warning message:
+NAs introduced by coercion 
+Error in file(file, "rt") : cannot open the connection
+Calls: read.csv -> read.table -> file
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'Simulations/MC_quantiles/n50_N10000_r5/Tables/Q_quantiles_cNA.csv': No such file or directory
+Execution halted
