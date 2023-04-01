@@ -35,12 +35,8 @@ n <- parameters[1]
 N <- parameters[2]
 r <- parameters[3]
 distribution <- parameters[4]
-c_t <- as.double(substr(this_file_name, 14, 16)) / 100
+c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 
-# load empirical quantiles for each rule
-critical_values <- read.csv(
-  paste("Simulations/MC_quantiles/n", n, "_N", N, "_r", r, "/Tables/Q_quantiles_c", (c_t*100), ".csv", sep="")
-)[["X0.95"]]
 
 cat("Sanity check of hyperparameters: \n")
 cat(paste("n:\t", n, "\n"))
@@ -49,6 +45,11 @@ cat(paste("r:\t", r, "\n"))
 cat(paste("c:\t", c_t, "\n"))
 cat(paste("d:\t", distribution, "\n"))
 cat("\n")
+
+# load empirical quantiles for each rule
+critical_values <- read.csv(
+  paste("Simulations/MC_quantiles/n", n, "_N", N, "_r", r, "/Tables/Q_quantiles_c", (c_t*100), ".csv", sep="")
+)[["X0.95"]]
 
 ###########
 # generowanie alternatyw
