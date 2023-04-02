@@ -137,7 +137,7 @@ building_M <- matrix(nrow=N, ncol=2^r)
 
 set.seed(73)
 for(i in 1:N){
-  cat("Simulation no.", i, "\n")
+  # cat("Simulation no.", i, "\n")
   
   if(distribution == "B3"){
     theta <- 2.5
@@ -284,21 +284,20 @@ df_ls <- data.frame(
   "T.M" = apply(building_T.M, 2, mean),
   "M" = apply(building_M, 2, mean)
 )
-df_ls
 
 write.csv(
   format(df, nsmall=3, digits=3),
-  paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_powers_c", round(c_t*100, 0), ".csv", sep="")
+  paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_powers_c", round(c_t*100, 0), "_d", distribution, ".csv", sep="")
 )
 
 write.csv(
   format(df, nsmall=3, digits=3),
-  paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_mean_ls_c", round(c_t*100, 0), ".csv", sep="")
+  paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_mean_ls_c", round(c_t*100, 0), "_d", distribution, ".csv", sep="")
 )
 
 rule_names <- c("A", "T.A", "S", "T.M", "M")
 
-png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0), ".png", sep=""), height=900, width=600)
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
   b = barplot( 
