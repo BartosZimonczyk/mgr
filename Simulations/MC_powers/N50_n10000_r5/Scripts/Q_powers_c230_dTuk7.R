@@ -30,13 +30,13 @@ parameters <- unname(parameters)
 # r <- 5
 # c_t <- 2.3
 # distribution <- "B3"
+# this_file_name <- "Q_powers_c230_dB3.R"
 
 n <- parameters[1]
 N <- parameters[2]
 r <- parameters[3]
-distribution <- strsplit(this_file_name, "_")[4]
-distribution <- strsplit(distribution, ".")[1]
-distribution <- substring(distribution, 2)
+distribution <- unlist(strsplit(this_file_name, "_"))[4]
+distribution <- substring(distribution, 2, nchar(distribution) - 2)
 c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 
 
