@@ -300,7 +300,8 @@ rule_names <- c("A", "T.A", "S", "T.M", "M")
 png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
-  b = barplot( 
+  b = barplot(
+    names.arg = 1:32,
     df_ls[,i],
     ylim = c(0, max(df_ls)+1),
     yaxt='n',
@@ -312,6 +313,14 @@ for(i in 1:5){
 }
 
 dev.off()
+
+
+
+
+
+
+
+
 
 
 
