@@ -12,6 +12,15 @@ get_this_file <- function(){
 
 # automating simulations by changing control to naming
 # given folders and files
+
+# testing by hand
+# n <- 50
+# N <- 100
+# r <- 5
+# c_t <- 2.3
+# distribution <- "Norm"
+# this_file_name <- "Q_powers_c230_dNorm.R"
+
 path <- get_this_file()
 print(path)
 path_splitted <- strsplit(path, "/")[[1]]
@@ -23,14 +32,6 @@ print(parameters)
 parameters <- sapply(parameters, substring, 2)
 parameters <- sapply(parameters, as.double)
 parameters <- unname(parameters)
-
-# testing by hand
-# n <- 50
-# N <- 100
-# r <- 5
-# c_t <- 2.3
-# distribution <- "B3"
-# this_file_name <- "Q_powers_c230_dB3.R"
 
 n <- parameters[1]
 N <- parameters[2]
@@ -278,12 +279,14 @@ df <- data.frame('A' = round(mean(A > A_crit), 3)*100,
 df
 
 df_ls <- data.frame(
-  "A" = apply(building_A, 2, mean),
-  "T.A" = apply(building_T.A, 2, mean),
-  "S" = apply(building_S, 2, mean),
-  "T.M" = apply(building_T.M, 2, mean),
-  "M" = apply(building_M, 2, mean)
+  "A" = apply(building_A, 2, mean, na.rm=TRUE),
+  "T.A" = apply(building_T.A, 2, mean, na.rm=TRUE),
+  "S" = apply(building_S, 2, mean, na.rm=TRUE),
+  "T.M" = apply(building_T.M, 2, mean, na.rm=TRUE),
+  "M" = apply(building_M, 2, mean, na.rm=TRUE)
 )
+
+df_ls
 
 write.csv(
   format(df, nsmall=3, digits=3),
@@ -296,20 +299,23 @@ write.csv(
 )
 
 rule_names <- c("A", "T.A", "S", "T.M", "M")
+order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
+
 
 png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
   b = barplot(
-    names.arg = 1:32,
-    df_ls[,i],
-    ylim = c(0, max(df_ls)+1),
+    names.arg = round(p(order_of_ls), 2),
+    df_ls[order_of_ls, i],
+    ylim = c(0, max(df_ls)+1.1),
     yaxt='n',
     main=paste("Barplot of mean values of lj for rule", rule_names[i]),
-    xlab = "j",
-    ylab = "Mean"
+    xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+    ylab = "Mean",
+    las=2
   )
-  text(b, df_ls[,i]+0.75, labels=paste(as.character(round(df_ls[,i], 2))))
+  text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
 }
 
 dev.off()
