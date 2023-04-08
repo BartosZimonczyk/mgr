@@ -2,5 +2,8 @@
 .RData
 .RHistory
 
+# ignore zips
+.zip
+
 # ignore WCSS logs related files 
 *.e4*
