@@ -14,7 +14,7 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_powers/N50_n10000_r5/Scripts/Q_powers_c230_dB3.R"
+[1] "/home/barzim11/mgr/Simulations/MC_powers/N50_n10000_r5/Scripts/Q_powers_c230_dH0.R"
 [[1]]
 [1] "N50"    "n10000" "r5"    
 
@@ -23,12 +23,5 @@ n:	 50
 N:	 10000 
 r:	 5 
 c:	 2.3 
-d:	 B3 
+d:	 H0 
 
-    A T.A   S T.M   M
-1 2.8 8.4 3.9 8.4 2.8
-null device 
-          1 
- apply non-function
-Calls: ranydist
-Execution halted
