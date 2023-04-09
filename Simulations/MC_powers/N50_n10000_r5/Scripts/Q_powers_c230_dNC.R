@@ -18,8 +18,8 @@ get_this_file <- function(){
 # N <- 100
 # r <- 5
 # c_t <- 2.3
-# distribution <- "Norm"
-# this_file_name <- "Q_powers_c230_dNorm.R"
+# distribution <- "H0"
+# this_file_name <- "Q_powers_c230_dH0.R"
 
 path <- get_this_file()
 print(path)
@@ -51,7 +51,7 @@ cat("\n")
 
 # load empirical quantiles for each rule
 critical_values <- read.csv(
-  paste("Simulations/MC_quantiles/n", n, "_N", N, "_r", r, "/Tables/Q_quantiles_c", (c_t*100), ".csv", sep="")
+  paste("Simulations/MC_quantiles/n", n, "_N", 10000, "_r", r, "/Tables/Q_quantiles_c", (c_t*100), ".csv", sep="")
 )[["X0.95"]]
 
 ###########
@@ -250,6 +250,8 @@ for(i in 1:N){
   }else if(distribution == "Tuk7"){
     X <- rTuk(n, 7, 1.6)
     X <- X - median(X)
+  }else if(distribution == "H0"){
+    X <- runif(n, -1, 1)
   }
   
   this_A <-   Q_test(X, r, rule = "A")
@@ -270,6 +272,13 @@ for(i in 1:N){
   building_T.M[i, ] <- this_T.M$Ls
   building_M[i, ] <- this_M$Ls
 }
+
+df_H0 <- data.frame('A' = round(mean(A <= A_crit), 3)*100,
+                 'T.A' = round(mean(T.A <= T.A_crit), 3)*100,
+                 'S' = round(mean(S <= S_crit), 3)*100,
+                 'T.M' = round(mean(T.M <= T.M_crit), 3)*100,
+                 'M' = round(mean(M <= M_crit), 3)*100)
+df_H0
 
 df <- data.frame('A' = round(mean(A > A_crit), 3)*100,
                  'T.A' = round(mean(T.A > T.A_crit), 3)*100,
@@ -294,7 +303,7 @@ write.csv(
 )
 
 write.csv(
-  format(df, nsmall=3, digits=3),
+  format(df_ls, nsmall=3, digits=3),
   paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_mean_ls_c", round(c_t*100, 0), "_d", distribution, ".csv", sep="")
 )
 
