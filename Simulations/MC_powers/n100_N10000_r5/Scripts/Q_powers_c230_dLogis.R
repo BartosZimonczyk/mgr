@@ -18,8 +18,8 @@ get_this_file <- function(){
 # N <- 100
 # r <- 5
 # c_t <- 2.3
-# distribution <- "H0"
-# this_file_name <- "Q_powers_c230_dH0.R"
+# distribution <- "N2B2"
+# this_file_name <- "Q_powers_c230_dN2B2.R"
 
 path <- get_this_file()
 print(path)
@@ -135,6 +135,12 @@ building_T.A <- matrix(nrow=N, ncol=2^r)
 building_S <- matrix(nrow=N, ncol=2^r)
 building_T.M <- matrix(nrow=N, ncol=2^r)
 building_M <- matrix(nrow=N, ncol=2^r)
+
+chosen_k_A <- c()
+chosen_k_T.A <- c()
+chosen_k_S <- c()
+chosen_k_T.M <- c()
+chosen_k_M <- c()
 
 set.seed(73)
 for(i in 1:N){
@@ -266,26 +272,38 @@ for(i in 1:N){
   T.M[i] <- this_T.M$Q.test
   M[i] <-   this_M$Q.test
   
-  building_A[i, ] <- this_A$Ls
-  building_T.A[i, ] <- this_T.A$Ls
-  building_S[i, ] <- this_S$Ls
-  building_T.M[i, ] <- this_T.M$Ls
-  building_M[i, ] <- this_M$Ls
+  building_A[i, ] <- this_A$Ls^2
+  building_T.A[i, ] <- this_T.A$Ls^2
+  building_S[i, ] <- this_S$Ls^2
+  building_T.M[i, ] <- this_T.M$Ls^2
+  building_M[i, ] <- this_M$Ls^2
+  
+  chosen_k_A[i] <- this_A$k
+  chosen_k_T.A[i] <- this_T.A$k
+  chosen_k_S[i] <- this_S$k
+  chosen_k_T.M[i] <- this_T.M$k
+  chosen_k_M[i] <- this_M$k
 }
 
 df_H0 <- data.frame('A' = round(mean(A <= A_crit), 3)*100,
-                 'T.A' = round(mean(T.A <= T.A_crit), 3)*100,
-                 'S' = round(mean(S <= S_crit), 3)*100,
-                 'T.M' = round(mean(T.M <= T.M_crit), 3)*100,
-                 'M' = round(mean(M <= M_crit), 3)*100)
-df_H0
+                    'T.A' = round(mean(T.A <= T.A_crit), 3)*100,
+                    'S' = round(mean(S <= S_crit), 3)*100,
+                    'T.M' = round(mean(T.M <= T.M_crit), 3)*100,
+                    'M' = round(mean(M <= M_crit), 3)*100)
 
 df <- data.frame('A' = round(mean(A > A_crit), 3)*100,
                  'T.A' = round(mean(T.A > T.A_crit), 3)*100,
                  'S' = round(mean(S > S_crit), 3)*100,
                  'T.M' = round(mean(T.M > T.M_crit), 3)*100,
                  'M' = round(mean(M > M_crit), 3)*100)
-df
+
+mean_no_zeros <- function(V){
+  if(sum(V) == 0){
+    0
+  }else{
+    mean(V[V != 0])
+  }
+}
 
 df_ls <- data.frame(
   "A" = apply(building_A, 2, mean, na.rm=TRUE),
@@ -295,7 +313,13 @@ df_ls <- data.frame(
   "M" = apply(building_M, 2, mean, na.rm=TRUE)
 )
 
-df_ls
+df_ls_no_zeros <- data.frame(
+  "A" = apply(building_A, 2, mean_no_zeros),
+  "T.A" = apply(building_T.A, 2, mean_no_zeros),
+  "S" = apply(building_S, 2, mean_no_zeros),
+  "T.M" = apply(building_T.M, 2, mean_no_zeros),
+  "M" = apply(building_M, 2, mean_no_zeros)
+)
 
 write.csv(
   format(df, nsmall=3, digits=3),
@@ -310,22 +334,36 @@ write.csv(
 rule_names <- c("A", "T.A", "S", "T.M", "M")
 order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
 
-
 png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
 par(mfrow=c(5,1))
 for(i in 1:5){
   b = barplot(
     names.arg = round(p(order_of_ls), 2),
-    df_ls[order_of_ls, i],
-    ylim = c(0, max(df_ls)+1.1),
+    df_ls_no_zeros[order_of_ls, i],
+    ylim = c(0, max(df_ls_no_zeros)+1.1),
     yaxt='n',
     main=paste("Barplot of mean values of lj for rule", rule_names[i]),
     xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
     ylab = "Mean",
     las=2
   )
-  text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
+  text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
 }
+
+# par(mfrow=c(5,1))
+# for(i in 1:5){
+#   b = barplot(
+#     names.arg = round(p(order_of_ls), 2),
+#     df_ls[order_of_ls, i],
+#     ylim = c(0, max(df_ls)+1.1),
+#     yaxt='n',
+#     main=paste("Barplot of mean values of lj for rule", rule_names[i]),
+#     xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+#     ylab = "Mean",
+#     las=2
+#   )
+#   text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
+# }
 
 dev.off()
 

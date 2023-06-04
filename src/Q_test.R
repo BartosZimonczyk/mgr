@@ -1,7 +1,7 @@
 source("src/basic_functions.R")
 source("src/choice_rules.R")
 
-Q_test <- function(X, r, rule, c_t=2.4){
+Q_test <- function(X, r, rule, c_t=2.3){
   rule <- toupper(rule)
   if(rule == "A"){
     k <- rule_A(X, r)
@@ -18,7 +18,7 @@ Q_test <- function(X, r, rule, c_t=2.4){
   }
   
   Q_all <- Q(k, X)
-  output <- list(Q_all$Q.value, k, Q_all$Ls)
+  output <- list(Q_all$Q.value, k, c(Q_all$Ls, rep(0, times=2^r-k)))
   names(output) <- c("Q.test", "k", "Ls")
   output
 }
