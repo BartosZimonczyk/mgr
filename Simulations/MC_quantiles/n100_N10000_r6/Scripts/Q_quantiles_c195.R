@@ -102,10 +102,11 @@ for(i in 1:5){
             mean(K_matrix[,i] == 4),
             mean(K_matrix[,i] == 8),
             mean(K_matrix[,i] == 16),
-            mean(K_matrix[,i] == 32))
+            mean(K_matrix[,i] == 32),
+            mean(K_matrix[,i] == 64))
   b = barplot( 
     freqs,
-    names.arg = c("1", "2", "4", "8", "16", "32"),
+    names.arg = c("1", "2", "4", "8", "16", "32", "64"),
     ylim = c(0,1.3),
     yaxt='n',
     main=paste("Histogram of values of rule", rule_names[i]),
