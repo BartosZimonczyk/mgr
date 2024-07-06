@@ -335,35 +335,35 @@ rule_names <- c("A", "T.A", "S", "T.M", "M")
 order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
 
 png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
-par(mfrow=c(5,1))
-for(i in 1:5){
-  b = barplot(
-    names.arg = round(p(order_of_ls), 2),
-    df_ls_no_zeros[order_of_ls, i],
-    ylim = c(0, max(df_ls_no_zeros)+1.1),
-    yaxt='n',
-    main=paste("Barplot of mean values of lj for rule", rule_names[i]),
-    xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
-    ylab = "Mean",
-    las=2
-  )
-  text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
-}
-
 # par(mfrow=c(5,1))
 # for(i in 1:5){
 #   b = barplot(
 #     names.arg = round(p(order_of_ls), 2),
-#     df_ls[order_of_ls, i],
-#     ylim = c(0, max(df_ls)+1.1),
+#     df_ls_no_zeros[order_of_ls, i],
+#     ylim = c(0, max(df_ls_no_zeros)+1.1),
 #     yaxt='n',
 #     main=paste("Barplot of mean values of lj for rule", rule_names[i]),
 #     xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
 #     ylab = "Mean",
 #     las=2
 #   )
-#   text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
+#   text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
 # }
+
+par(mfrow=c(5,1))
+for(i in 1:5){
+  b = barplot(
+    names.arg = round(p(order_of_ls), 2),
+    df_ls[order_of_ls, i] / sqrt(n),
+    ylim = c(0, max(df_ls)+1.1),
+    yaxt='n',
+    main=paste("Barplot of mean values of lj for rule", rule_names[i]),
+    xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+    ylab = "Mean",
+    las=2
+  )
+  text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
+}
 
 dev.off()
 
