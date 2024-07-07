@@ -14,14 +14,20 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_quantiles/n100_N10000_r6/Scripts/Q_quantiles_c125.R"
-[[1]]
-[1] "n100"   "N10000" "r6"    
+[1] "/home/barzim11/mgr/Simulations/MC_powers/n50_N10000_r5/Scripts/Q_powers_c230_dENB.R"
+[[[1]][[1  "n50"    "N10000  "r5"   
 
 Sanity check of hyperparameters: 
-n:	 100 
+n:	 50 
 N:	 10000 
-r:	 6 
-c:	 1.25 
-nnull device 
+r:	 5 
+c:	 2.3 
+d:	 ENB null device 
           1 
+ 
+ 
+         1 
+axis, theta) : 
+  attempt to apply non-function
+Calls: ranydist
+Execution halted
