@@ -356,13 +356,13 @@ for(i in 1:5){
     names.arg = round(p(order_of_ls), 2),
     df_ls[order_of_ls, i] / sqrt(n),
     ylim = c(0, max(df_ls/sqrt(n))+1.1),
-    yaxt='n',
-    main=paste("Barplot of mean values of lj for rule", rule_names[i]),
-    xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+    yaxt = 'n',
+    main = bquote(paste("Barplot of mean values of ", gamma[j], " for rule" ~ .(rule_names[i]))),
+    xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
     ylab = "Mean",
     las=2
   )
-  text(b, df_ls[order_of_ls, i]/sqrt(n)+0.5, labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
+  text(b, df_ls[order_of_ls, i]/sqrt(n)+0.3, labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 }
 
 dev.off()
