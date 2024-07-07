@@ -1,0 +1,31 @@
+During startup - Warning messages:
+1: Setting LC_CTYPE failed, using "C" 
+2: Setting LC_COLLATE failed, using "C" 
+3: Setting LC_TIME failed, using "C" 
+4: Setting LC_MESSAGES failed, using "C" 
+5: Setting LC_MONETARY failed, using "C" 
+6: Setting LC_PAPER failed, using "C" 
+7: Setting LC_MEASUREMENT failed, using "C" 
+-- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+v ggplot2 3.3.3     v purrr   0.3.4
+v tibble  3.1.2     v dplyr   1.0.6
+v tidyr   1.1.3     v stringr 1.4.0
+v readr   1.4.0     v forcats 0.5.1
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+[1] "/home/barzim11/mgr/Simulations/MC_powers/n50_N10000_r5/Scripts/Q_powers_c230_dLehm.R"
+[[1]]
+[1] "n50"    "N10000" "r5"    
+
+Sanity check of hyperparameters: 
+n:	 50 
+N:	 10000 
+r:	 5 
+c:	 2.3 
+d:	 Lehm 
+
+Error in dists_list[[distribution]](x_axis, theta) : 
+  attempt to apply non-function
+Calls: ranydist
+Execution halted
