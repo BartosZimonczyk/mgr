@@ -78,7 +78,7 @@ EV <- function(x, theta){exp(x-theta - exp(x-theta))}
 new_beta <- function(x, theta){0.3*(dbeta(x - 1, 1, 2) + dbeta(x, 2, 1)) + 0.4*dbeta(x-0.5, 1, theta)}
 mix_beta <- function(x, theta){0.1*(dbeta(x-1,1,2) + dbeta(x,2,1)) + 0.8*dbeta(x+2^(-1/theta) - 1, 1,theta)}
 new_sin <- function(x, theta, j){0.5 + theta*sin(pi * j *x)}
-lehm <- function(x, theta){(theta * 0.5^theta * (x+1)^(theta-1))*(abs(x) <= 1)}
+Lehm <- function(x, theta){(theta * 0.5^theta * (x+1)^(theta-1))*(abs(x) <= 1)}
 N2B2 <- function(x, theta){0.25*(dnorm(x-2) + dnorm(x+2)) + dbeta(4*x+4, theta, 4) + 0.75*dbeta(3*x, 6, 3)}
 LC <- function(x, theta){0.7*dnorm(x-theta/0.7) + 0.3*dnorm(x+theta/0.3)}
 NC2 <- function(x, theta){0.3*dnorm(x) + 0.4*dcauchy(x-theta) + 0.3*dcauchy(x+2*theta)}
@@ -102,7 +102,7 @@ dists_list[["EV"]] <- EV
 dists_list[["newbeta"]] <- new_beta
 dists_list[["mixbeta"]] <- mix_beta
 dists_list[["newsin"]] <- new_sin
-dists_list[["lehm"]] <- lehm
+dists_list[["Lehm"]] <- Lehm
 dists_list[["N2B2"]] <- N2B2
 dists_list[["LC"]] <- LC
 dists_list[["NC2"]] <- NC2
@@ -256,7 +256,7 @@ for(i in 1:N){
   }else if(distribution == "Tuk7"){
     X <- rTuk(n, 7, 1.6)
     X <- X - median(X)
-  }else if(distribution == "H0"){
+  }else if(distribution == "HO"){
     X <- runif(n, -1, 1)
   }
   

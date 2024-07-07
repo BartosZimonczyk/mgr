@@ -14,4 +14,4 @@ source /usr/local/sbin/modules.sh
 module load R/4.1.0-foss-2021a
 
 # execute given R script
-Rscript $1 >& Rscript_output_$2.txt
+Rscript $1 >& Rscripts/Rscript_output_$2.txt
