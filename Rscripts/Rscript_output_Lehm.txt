@@ -25,7 +25,5 @@ r:	 5
 c:	 2.3 
 d:	 Lehm 
 
-Error in dists_list[[distribution]](x_axis, theta) : 
-  attempt to apply non-function
-Calls: ranydist
-Execution halted
+null device 
+          1 

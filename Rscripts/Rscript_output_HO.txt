@@ -25,6 +25,5 @@ r:	 5
 c:	 2.3 
 d:	 HO 
 
-Error in Q_test(X, r, rule = "A") : object 'X' not found
-Calls: Q_test -> rule_A
-Execution halted
+null device 
+          1 

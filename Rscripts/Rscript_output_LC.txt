@@ -25,3 +25,5 @@ r:	 5
 c:	 2.3 
 d:	 LC 
 
+null device 
+          1 
