@@ -272,11 +272,11 @@ for(i in 1:N){
   T.M[i] <- this_T.M$Q.test
   M[i] <-   this_M$Q.test
   
-  building_A[i, ] <- this_A$Ls^2
-  building_T.A[i, ] <- this_T.A$Ls^2
-  building_S[i, ] <- this_S$Ls^2
-  building_T.M[i, ] <- this_T.M$Ls^2
-  building_M[i, ] <- this_M$Ls^2
+  building_A[i, ] <- this_A$Ls
+  building_T.A[i, ] <- this_T.A$Ls
+  building_S[i, ] <- this_S$Ls
+  building_T.M[i, ] <- this_T.M$Ls
+  building_M[i, ] <- this_M$Ls
   
   chosen_k_A[i] <- this_A$k
   chosen_k_T.A[i] <- this_T.A$k
