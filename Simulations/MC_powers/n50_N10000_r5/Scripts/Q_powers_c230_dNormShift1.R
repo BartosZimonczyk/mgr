@@ -33,12 +33,12 @@ distribution <- substring(distribution, 2, nchar(distribution) - 2)
 c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 
 # testing by hand
-n <- 50
-N <- 100
-r <- 5
-c_t <- 2.3
-distribution <- "NormShift3"
-this_file_name <- "Q_powers_c230_dB3.R"
+# n <- 50
+# N <- 100
+# r <- 5
+# c_t <- 2.3
+# distribution <- "NormShift3"
+# this_file_name <- "Q_powers_c230_dB3.R"
 
 
 cat("Sanity check of hyperparameters: \n")
