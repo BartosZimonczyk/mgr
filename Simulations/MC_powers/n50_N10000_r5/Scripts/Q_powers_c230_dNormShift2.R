@@ -33,12 +33,12 @@ distribution <- substring(distribution, 2, nchar(distribution) - 2)
 c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 
 # testing by hand
-# n <- 50
-# N <- 100
-# r <- 5
-# c_t <- 2.3
-# distribution <- "Cauchy"
-# this_file_name <- "Q_powers_c230_dCauchy.R"
+n <- 50
+N <- 100
+r <- 5
+c_t <- 2.3
+distribution <- "NormShift3"
+this_file_name <- "Q_powers_c230_dB3.R"
 
 
 cat("Sanity check of hyperparameters: \n")
@@ -350,6 +350,13 @@ png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(
 #   text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
 # }
 
+zero_neg_values_and_adapt <- function(x) {
+  ind <- which(x < 0.01)
+  x[ind] <- 0.4
+  x[-ind] <- x[-ind] + 0.3
+  x + 0.3
+}
+
 par(mfrow=c(5,1))
 for(i in 1:5){
   b = barplot(
@@ -360,9 +367,10 @@ for(i in 1:5){
     main = bquote(paste("Barplot of mean values of ", gamma[j], " for rule" ~ .(rule_names[i]))),
     xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
     ylab = "Mean",
-    las=2
+    las=2,
+    offset=0.3
   )
-  text(b, df_ls[order_of_ls, i]/sqrt(n)+0.3, labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
+  text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 }
 
 dev.off()
