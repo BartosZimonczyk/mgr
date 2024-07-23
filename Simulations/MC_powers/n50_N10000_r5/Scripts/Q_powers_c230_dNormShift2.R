@@ -32,12 +32,12 @@ distribution <- unlist(strsplit(this_file_name, "_"))[4]
 distribution <- substring(distribution, 2, nchar(distribution) - 2)
 c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 
-# testing by hand
+#testing by hand
 # n <- 50
 # N <- 100
 # r <- 5
 # c_t <- 2.3
-# distribution <- "NormShift3"
+# distribution <- "LC"
 # this_file_name <- "Q_powers_c230_dB3.R"
 
 
@@ -350,13 +350,26 @@ png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(
 #   text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
 # }
 
+min_or_zero <- function(x) {
+  if(min(x) > 0){
+    return(0)
+  }else{
+    return(min(x))
+  }
+}
 zero_neg_values_and_adapt <- function(x) {
   ind <- which(x < 0.01)
-  x[ind] <- 0.4
-  x[-ind] <- x[-ind] + 0.3
-  x + 0.3
+  if(identical(ind, integer(0))){
+    x + 0.2
+  }else{
+    x_copy <- x
+    x[ind] <- 0.1
+    x[-ind] <- x[-ind] + 0.2
+    x + abs(min_or_zero(x_copy))
+  }
 }
 
+#png(paste("Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1200, width=800)
 par(mfrow=c(5,1))
 for(i in 1:5){
   b = barplot(
@@ -368,7 +381,7 @@ for(i in 1:5){
     xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
     ylab = "Mean",
     las=2,
-    offset=0.3
+    offset=abs(min_or_zero(df_ls[order_of_ls, i]/sqrt(n)))
   )
   text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 }
