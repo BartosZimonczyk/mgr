@@ -13,14 +13,6 @@ get_this_file <- function(){
 # automating simulations by changing control to naming
 # given folders and files
 
-# testing by hand
-# n <- 50
-# N <- 100
-# r <- 5
-# c_t <- 2.3
-# distribution <- "N2B2"
-# this_file_name <- "Q_powers_c230_dN2B2.R"
-
 path <- get_this_file()
 print(path)
 path_splitted <- strsplit(path, "/")[[1]]
@@ -39,6 +31,14 @@ r <- parameters[3]
 distribution <- unlist(strsplit(this_file_name, "_"))[4]
 distribution <- substring(distribution, 2, nchar(distribution) - 2)
 c_t <- as.double(substr(this_file_name, 11, 13)) / 100
+
+#testing by hand
+# n <- 50
+# N <- 100
+# r <- 5
+# c_t <- 2.3
+# distribution <- "LC"
+# this_file_name <- "Q_powers_c230_dB3.R"
 
 
 cat("Sanity check of hyperparameters: \n")
@@ -78,7 +78,7 @@ EV <- function(x, theta){exp(x-theta - exp(x-theta))}
 new_beta <- function(x, theta){0.3*(dbeta(x - 1, 1, 2) + dbeta(x, 2, 1)) + 0.4*dbeta(x-0.5, 1, theta)}
 mix_beta <- function(x, theta){0.1*(dbeta(x-1,1,2) + dbeta(x,2,1)) + 0.8*dbeta(x+2^(-1/theta) - 1, 1,theta)}
 new_sin <- function(x, theta, j){0.5 + theta*sin(pi * j *x)}
-lehm <- function(x, theta){(theta * 0.5^theta * (x+1)^(theta-1))*(abs(x) <= 1)}
+Lehm <- function(x, theta){(theta * 0.5^theta * (x+1)^(theta-1))*(abs(x) <= 1)}
 N2B2 <- function(x, theta){0.25*(dnorm(x-2) + dnorm(x+2)) + dbeta(4*x+4, theta, 4) + 0.75*dbeta(3*x, 6, 3)}
 LC <- function(x, theta){0.7*dnorm(x-theta/0.7) + 0.3*dnorm(x+theta/0.3)}
 NC2 <- function(x, theta){0.3*dnorm(x) + 0.4*dcauchy(x-theta) + 0.3*dcauchy(x+2*theta)}
@@ -102,7 +102,7 @@ dists_list[["EV"]] <- EV
 dists_list[["newbeta"]] <- new_beta
 dists_list[["mixbeta"]] <- mix_beta
 dists_list[["newsin"]] <- new_sin
-dists_list[["lehm"]] <- lehm
+dists_list[["Lehm"]] <- Lehm
 dists_list[["N2B2"]] <- N2B2
 dists_list[["LC"]] <- LC
 dists_list[["NC2"]] <- NC2
@@ -256,7 +256,7 @@ for(i in 1:N){
   }else if(distribution == "Tuk7"){
     X <- rTuk(n, 7, 1.6)
     X <- X - median(X)
-  }else if(distribution == "H0"){
+  }else if(distribution == "HO"){
     X <- runif(n, -1, 1)
   }
   
@@ -272,11 +272,11 @@ for(i in 1:N){
   T.M[i] <- this_T.M$Q.test
   M[i] <-   this_M$Q.test
   
-  building_A[i, ] <- this_A$Ls^2
-  building_T.A[i, ] <- this_T.A$Ls^2
-  building_S[i, ] <- this_S$Ls^2
-  building_T.M[i, ] <- this_T.M$Ls^2
-  building_M[i, ] <- this_M$Ls^2
+  building_A[i, ] <- this_A$Ls
+  building_T.A[i, ] <- this_T.A$Ls
+  building_S[i, ] <- this_S$Ls
+  building_T.M[i, ] <- this_T.M$Ls
+  building_M[i, ] <- this_M$Ls
   
   chosen_k_A[i] <- this_A$k
   chosen_k_T.A[i] <- this_T.A$k
@@ -334,36 +334,57 @@ write.csv(
 rule_names <- c("A", "T.A", "S", "T.M", "M")
 order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
 
-png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=600)
-par(mfrow=c(5,1))
-for(i in 1:5){
-  b = barplot(
-    names.arg = round(p(order_of_ls), 2),
-    df_ls_no_zeros[order_of_ls, i],
-    ylim = c(0, max(df_ls_no_zeros)+1.1),
-    yaxt='n',
-    main=paste("Barplot of mean values of lj for rule", rule_names[i]),
-    xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
-    ylab = "Mean",
-    las=2
-  )
-  text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
-}
-
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1200, width=800)
 # par(mfrow=c(5,1))
 # for(i in 1:5){
 #   b = barplot(
 #     names.arg = round(p(order_of_ls), 2),
-#     df_ls[order_of_ls, i],
-#     ylim = c(0, max(df_ls)+1.1),
+#     df_ls_no_zeros[order_of_ls, i],
+#     ylim = c(0, max(df_ls_no_zeros)+1.1),
 #     yaxt='n',
 #     main=paste("Barplot of mean values of lj for rule", rule_names[i]),
 #     xlab = expression(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
 #     ylab = "Mean",
 #     las=2
 #   )
-#   text(b, df_ls[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls[order_of_ls ,i], 2))))
+#   text(b, df_ls_no_zeros[order_of_ls, i]+0.85, labels=paste(as.character(round(df_ls_no_zeros[order_of_ls ,i], 2))))
 # }
+
+min_or_zero <- function(x) {
+  if(min(x) > 0){
+    return(0)
+  }else{
+    return(min(x))
+  }
+}
+zero_neg_values_and_adapt <- function(x) {
+  ind <- which(x < 0.01)
+  if(identical(ind, integer(0))){
+    x + 0.2
+  }else{
+    x_copy <- x
+    x[ind] <- 0.1
+    x[-ind] <- x[-ind] + 0.2
+    x + abs(min_or_zero(x_copy))
+  }
+}
+
+#png(paste("Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1200, width=800)
+par(mfrow=c(5,1))
+for(i in 1:5){
+  b = barplot(
+    names.arg = round(p(order_of_ls), 2),
+    df_ls[order_of_ls, i] / sqrt(n),
+    ylim = c(0, max(df_ls/sqrt(n))+1.1),
+    yaxt = 'n',
+    main = bquote(paste("Barplot of mean values of ", gamma[j], " for rule" ~ .(rule_names[i]))),
+    xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+    ylab = "Mean",
+    las=2,
+    offset=abs(min_or_zero(df_ls[order_of_ls, i]/sqrt(n)))
+  )
+  text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
+}
 
 dev.off()
 
