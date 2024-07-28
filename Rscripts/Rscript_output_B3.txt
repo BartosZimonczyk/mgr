@@ -14,14 +14,14 @@ v readr   1.4.0     v forcats 0.5.1
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-[1] "/home/barzim11/mgr/Simulations/MC_powers/n50_N10000_r5/Scripts/Q_powers_c230_dB3.R"
+[1] "/home/barzim11/mgr/Simulations/MC_powers/n100_N10000_r6/Scripts/Q_powers_c230_dB3.R"
 [[1]]
-[1] "n50"    "N10000" "r5"    
+[1] "n100"   "N10000" "r6"    
 
 Sanity check of hyperparameters: 
-n:	 50 
+n:	 100 
 N:	 10000 
-r:	 5 
+r:	 6 
 c:	 2.3 
 d:	 B3 
 
