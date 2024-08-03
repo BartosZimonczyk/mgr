@@ -38,7 +38,7 @@ c_t <- as.double(substr(this_file_name, 11, 13)) / 100
 # r <- 5
 # c_t <- 2.3
 # distribution <- "LC"
-# this_file_name <- "Q_powers_c230_dB3.R"
+# this_file_name <- "Q_powers_c230_dLC.R"
 
 
 cat("Sanity check of hyperparameters: \n")
@@ -331,10 +331,10 @@ write.csv(
   paste("Simulations/MC_powers/", this_folder_name, "/Tables/Q_mean_ls_c", round(c_t*100, 0), "_d", distribution, ".csv", sep="")
 )
 
-rule_names <- c("A", "T.A", "S", "T.M", "M")
+rule_names <- c("A", "S.A", "S", "S.M", "M")
 order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
 
-png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1200, width=800)
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1000, width=800)
 # par(mfrow=c(5,1))
 # for(i in 1:5){
 #   b = barplot(
@@ -368,10 +368,9 @@ zero_neg_values_and_adapt <- function(x) {
     x + abs(min_or_zero(x_copy))
   }
 }
-
-#png(paste("Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1200, width=800)
-par(mfrow=c(5,1))
-for(i in 1:5){
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1000, width=800)
+par(mfrow=c(3,1))
+for(i in 3:5){
   b = barplot(
     names.arg = round(p(order_of_ls), 2),
     df_ls[order_of_ls, i] / sqrt(n),
@@ -385,6 +384,24 @@ for(i in 1:5){
   )
   text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 }
+
+dev.off()
+
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_Monly_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=400, width=800)
+par(mfrow=c(1,1))
+i <- 5
+b = barplot(
+  names.arg = round(p(order_of_ls), 2),
+  df_ls[order_of_ls, i] / sqrt(n),
+  ylim = c(0, max(df_ls/sqrt(n))+1.1),
+  yaxt = 'n',
+  main = bquote(paste("Barplot of mean values of ", gamma[j], " for rule" ~ .(rule_names[i]))),
+  xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
+  ylab = "Mean",
+  las=2,
+  offset=abs(min_or_zero(df_ls[order_of_ls, i]/sqrt(n)))
+)
+text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 
 dev.off()
 

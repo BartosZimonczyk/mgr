@@ -1,5 +1,7 @@
 par(mfrow=c(4, 2))
 
+mmax <- 1/sqrt(2*1/16)
+
 k <- 1/2
 p <- 1/sqrt(2*k)
 
@@ -11,7 +13,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_1",
   xlab="u",
   ylab="l_j(u)",
@@ -32,7 +34,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_2",
   xlab="u",
   ylab="l_j(u)",
@@ -53,7 +55,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_3",
   xlab="u",
   ylab="l_j(u)",
@@ -74,7 +76,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_4",
   xlab="u",
   ylab="l_j(u)",
@@ -95,7 +97,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_5",
   xlab="u",
   ylab="l_j(u)",
@@ -116,7 +118,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_6",
   xlab="u",
   ylab="l_j(u)",
@@ -138,7 +140,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_7",
   xlab="u",
   ylab="l_j(u)",
@@ -159,7 +161,7 @@ plot(
   l1, 
   type='l', 
   xlim=c(0, 1),
-  ylim=c(-p, p),
+  ylim=c(-mmax, mmax),
   main="Function l_8",
   xlab="u",
   ylab="l_j(u)",
