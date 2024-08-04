@@ -334,7 +334,7 @@ write.csv(
 rule_names <- c("A", "S.A", "S", "S.M", "M")
 order_of_ls <- c(17,9,18,5,19,10,20,3,21,11,22,6,23,12,24,2,25,13,26,7,27,14,28,4,29,15,30,8,31,16,32,1)
 
-png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1000, width=800)
+#png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1000, width=800)
 # par(mfrow=c(5,1))
 # for(i in 1:5){
 #   b = barplot(
@@ -360,27 +360,29 @@ min_or_zero <- function(x) {
 zero_neg_values_and_adapt <- function(x) {
   ind <- which(x < 0.01)
   if(identical(ind, integer(0))){
-    x + 0.2
+    x + 0.0
   }else{
     x_copy <- x
     x[ind] <- 0.1
-    x[-ind] <- x[-ind] + 0.2
-    x + abs(min_or_zero(x_copy))
+    x[-ind] <- x[-ind] + 0.1
+    # x + abs(min_or_zero(x_copy))
+    x
   }
 }
-png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=1000, width=800)
+png(paste("Simulations/MC_powers/", this_folder_name, "/Plots/Mean_ls_c", round(c_t*100, 0) ,"_d", distribution, ".png", sep=""), height=900, width=800)
 par(mfrow=c(3,1))
 for(i in 3:5){
   b = barplot(
     names.arg = round(p(order_of_ls), 2),
     df_ls[order_of_ls, i] / sqrt(n),
-    ylim = c(0, max(df_ls/sqrt(n))+1.1),
+    ylim = c(min(df_ls/sqrt(n)), max(df_ls/sqrt(n))+0.5),
     yaxt = 'n',
     main = bquote(paste("Barplot of mean values of ", gamma[j], " for rule" ~ .(rule_names[i]))),
     xlab = bquote(paste("The end point of interval in wich we are checking assymetry i.e., [0, ", phi, "(j)], in increasing order", sep="")),
     ylab = "Mean",
     las=2,
-    offset=abs(min_or_zero(df_ls[order_of_ls, i]/sqrt(n)))
+    #offset=abs(min_or_zero(df_ls[order_of_ls, i]/sqrt(n)))
+    offset=0
   )
   text(b, zero_neg_values_and_adapt(df_ls[order_of_ls, i]/sqrt(n)), labels=paste(as.character(round(df_ls[order_of_ls ,i]/sqrt(n), 2))), srt=60)
 }
